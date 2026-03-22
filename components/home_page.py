@@ -47,6 +47,3 @@ def home():
 
         <p style='font-size: 20px; color: #1995AD; font-weight: bold'>Thank you for using HydroWatch!</p>
     """,unsafe_allow_html=True)
-    
-    
-home()

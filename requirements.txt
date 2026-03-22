@@ -7,3 +7,5 @@ matplotlib
 numpy
 seaborn
 pygwalker
+python-dotenv
+scikit-learn

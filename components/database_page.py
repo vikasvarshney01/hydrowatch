@@ -118,5 +118,3 @@ def database():
         pyg_app = StreamlitRenderer(dataset= cleaned_data,appearance='light')
         pyg_app.explorer(default_tab='data')
         status_2.update(label='Tableau in Streamlit', state='complete',expanded=True)
-
-database()

@@ -116,6 +116,3 @@ def model():
 
         else:
             account_page.app()
-            
-        
-model()

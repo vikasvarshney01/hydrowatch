@@ -1,1 +1,25 @@
+# JSON files (includes Firebase credentials and Lottie files)
 *.json
+
+# Environment variables
+.env
+.env.local
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+
+# Streamlit
+.streamlit/secrets.toml

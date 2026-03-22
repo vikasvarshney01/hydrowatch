@@ -106,15 +106,49 @@ sidebar_custom_css = """
 
 st.markdown(sidebar_custom_css,unsafe_allow_html=True)
 
+# Import page modules
+from components import home_page, database_page, model_page, account_page
+
+# Initialize session state variables (must be before any page is loaded)
+if 'username' not in st.session_state:
+    st.session_state.username = ''
+    
+if 'useremail' not in st.session_state:
+    st.session_state.useremail = ''
+
+if 'signedout' not in st.session_state:
+    st.session_state.signedout = False
+    
+if 'signout' not in st.session_state:
+    st.session_state.signout = False
+
+if 'show_signup_success' not in st.session_state:
+    st.session_state.show_signup_success = False
+
+if 'page' not in st.session_state:
+    st.session_state.page = 'Home'
+
 logo = "HydroWatch.png"
-st.logo(logo, icon_image=logo)
-st.sidebar.write("<p style='color:white; font-size:25px; text-align: center'><b>Water Quality Monitoring and prediction System</b></p>", unsafe_allow_html=True)
 st.sidebar.image(logo)
+st.sidebar.write("<p style='color:white; font-size:25px; text-align: center'><b>Water Quality Monitoring and prediction System</b></p>", unsafe_allow_html=True)
 
-homepage = st.Page('components/home_page.py', title='Home', icon=':material/home:')
-database = st.Page('components/database_page.py', title='Explore Database', icon=":material/database:")
-model = st.Page('components/model_page.py', title='Prediction Model' ,icon=':material/model_training:')
-account = st.Page('components/account_page.py', title='Account', icon=':material/account_circle:')
+# Create navigation buttons in sidebar
+st.sidebar.write("---")
+if st.sidebar.button("🏠 Home", use_container_width=True, type="primary" if st.session_state.page == 'Home' else "secondary"):
+    st.session_state.page = 'Home'
+if st.sidebar.button("📊 Explore Database", use_container_width=True, type="primary" if st.session_state.page == 'Database' else "secondary"):
+    st.session_state.page = 'Database'
+if st.sidebar.button("🔮 Prediction Model", use_container_width=True, type="primary" if st.session_state.page == 'Model' else "secondary"):
+    st.session_state.page = 'Model'
+if st.sidebar.button("👤 Account", use_container_width=True, type="primary" if st.session_state.page == 'Account' else "secondary"):
+    st.session_state.page = 'Account'
 
-pg = st.navigation([homepage,database,model,account])
-pg.run()
+# Display the selected page
+if st.session_state.page == 'Home':
+    home_page.home()
+elif st.session_state.page == 'Database':
+    database_page.database()
+elif st.session_state.page == 'Model':
+    model_page.model()
+elif st.session_state.page == 'Account':
+    account_page.app()
