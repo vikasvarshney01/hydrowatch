@@ -42,7 +42,7 @@ def home():
         </ol>
 
         ## About Developer
-        <p style='font-size: 20px'>HydroWatch is developed by a student(Satwik Uppada) of Lovely Professional University with a passion for making clean water accessible to all
+        <p style='font-size: 20px'>HydroWatch is developed by a Vikas Varshney and Ashish Sharma students of Mangalayatan University with a passion for making clean water accessible to all
         . If you have any questions or feedback, feel free to reach out to us.</p> 
 
         <p style='font-size: 20px; color: #1995AD; font-weight: bold'>Thank you for using HydroWatch!</p>

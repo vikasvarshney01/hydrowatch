@@ -3,7 +3,12 @@ import pandas as pd
 import warnings
 import matplotlib.pyplot as plt
 import seaborn as sns
-from pygwalker.api.streamlit import StreamlitRenderer
+# Try to import pygwalker Streamlit renderer; degrade gracefully if unavailable
+try:
+    from pygwalker.api.streamlit import StreamlitRenderer
+    pygwalker_available = True
+except Exception:
+    pygwalker_available = False
 
 
 warnings.filterwarnings('ignore')
@@ -115,6 +120,9 @@ def database():
     st.header("Try out...new interactive visualization with your own ideas",divider='rainbow')
     
     with st.status("Rendering Tableau in Streamlit",state='running',expanded=False) as status_2:
-        pyg_app = StreamlitRenderer(dataset= cleaned_data,appearance='light')
-        pyg_app.explorer(default_tab='data')
+        if pygwalker_available:
+            pyg_app = StreamlitRenderer(dataset= cleaned_data,appearance='light')
+            pyg_app.explorer(default_tab='data')
+        else:
+            st.info("Interactive explorer (pygwalker) is not available in this environment.")
         status_2.update(label='Tableau in Streamlit', state='complete',expanded=True)
