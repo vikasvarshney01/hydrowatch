@@ -45,10 +45,7 @@ This guide will help you enable user authentication for HydroWatch.
 3. Click the **Web icon** (</>)
 4. Register your app with a nickname: `HydroWatch Web`
 5. Copy the **API Key** from the config object (looks like `AIzaSy...`)
-6. Open `components/account_page.py`
-7. Replace the API key in **TWO places**:
-   - Line ~48: `params={"key": "YOUR_API_KEY_HERE"}`
-   - Line ~77: `params={"key": "YOUR_API_KEY_HERE"}`
+6. Store it as `FIREBASE_API_KEY` in your local `.env` file.
 
 ### 6️⃣ Configure Environment Variables
 
@@ -67,7 +64,7 @@ DB_PASSWORD=your_password
 DB_NAME=water_quality
 ```
 
-**Note:** The `.env` and `firebase-credentials.json` files are in `.gitignore` and won't be committed to Git.
+Replace `your_firebase_web_api_key` with your actual Firebase Web API key. The `.env` and `firebase-credentials.json` files are in `.gitignore` and won't be committed to Git.
 
 ### 7️⃣ Restart the Application
 

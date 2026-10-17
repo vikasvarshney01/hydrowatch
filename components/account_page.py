@@ -46,14 +46,14 @@ if fb_credentials and not firebase_admin._apps:
 def app():
     
     # Check if Firebase is configured
-    if not firebase_initialized:
+    if not firebase_initialized or not firebase_api_key:
         st.error("🔧 Firebase Authentication Not Configured")
         st.info("""
-        Firebase credentials are not set up. To enable user authentication:
+        Firebase configuration is incomplete. To enable user authentication:
         
         1. Set up a Firebase project at https://firebase.google.com
         2. Download your Firebase credentials JSON file
-        3. Set the FIREBASE_CREDENTIALS environment variable to point to your credentials file
+        3. Set FIREBASE_CREDENTIALS and FIREBASE_API_KEY in your `.env` file
         
         For now, you can use Guest Mode in the Prediction Model page.
         """)
@@ -440,7 +440,7 @@ def app():
         analysis()
                      
 def credentials():
-    if not firebase_initialized:
+    if not firebase_initialized or not firebase_api_key:
         return ""
     # Check if username exists in session state and is not empty
     if 'username' in st.session_state and st.session_state.username:
