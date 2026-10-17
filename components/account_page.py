@@ -6,6 +6,7 @@ from firebase_admin import auth
 import requests
 import json
 import os
+import re
 from dotenv import load_dotenv
 import components.database_creation as database_creation
 from streamlit_lottie import st_lottie
@@ -19,6 +20,18 @@ def streamlit_secret(name, default=""):
         return st.secrets.get(name, default)
     except (FileNotFoundError, KeyError):
         return default
+
+
+def normalize_firebase_credentials(value):
+    if not isinstance(value, dict):
+        return value
+
+    normalized = dict(value)
+    markdown_link_pattern = re.compile(r"\[([^\]]+)\]\((?:mailto:)?[^)]+\)")
+    for key, item in normalized.items():
+        if isinstance(item, str):
+            normalized[key] = markdown_link_pattern.sub(r"\1", item)
+    return normalized
 
 def lottie_files(filepath: str):
     with open(filepath,'r') as f:
@@ -41,7 +54,7 @@ firebase_initialized = False
 if fb_credentials and not firebase_admin._apps:
     try:
         if isinstance(fb_credentials, dict):
-            cred = credentials.Certificate(dict(fb_credentials))
+            cred = credentials.Certificate(normalize_firebase_credentials(fb_credentials))
         else:
             cred = credentials.Certificate(fb_credentials)
         firebase_admin.initialize_app(cred)
