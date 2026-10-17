@@ -66,6 +66,29 @@ DB_NAME=water_quality
 
 Replace `your_firebase_web_api_key` with your actual Firebase Web API key. The `.env` and `firebase-credentials.json` files are in `.gitignore` and won't be committed to Git.
 
+### Streamlit Cloud Secrets
+
+For Streamlit Community Cloud, add these values in **App settings -> Secrets** instead of uploading `.env` or `firebase-credentials.json`:
+
+```toml
+FIREBASE_API_KEY = "your_firebase_web_api_key"
+
+[FIREBASE_CREDENTIALS]
+type = "service_account"
+project_id = "your_project_id"
+private_key_id = "your_private_key_id"
+private_key = "-----BEGIN PRIVATE KEY-----\\nYOUR_PRIVATE_KEY\\n-----END PRIVATE KEY-----\\n"
+client_email = "your_service_account_email"
+client_id = "your_client_id"
+auth_uri = "https://accounts.google.com/o/oauth2/auth"
+token_uri = "https://oauth2.googleapis.com/token"
+auth_provider_x509_cert_url = "https://www.googleapis.com/oauth2/v1/certs"
+client_x509_cert_url = "your_client_certificate_url"
+universe_domain = "googleapis.com"
+```
+
+Copy the corresponding values from your Firebase service-account JSON file. Keep these secrets private, then redeploy or restart the Streamlit app.
+
 ### 7️⃣ Restart the Application
 
 ```bash

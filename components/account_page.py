@@ -13,14 +13,21 @@ from streamlit_lottie import st_lottie
 # Load environment variables from .env file
 load_dotenv()
 
+
+def streamlit_secret(name, default=""):
+    try:
+        return st.secrets.get(name, default)
+    except (FileNotFoundError, KeyError):
+        return default
+
 def lottie_files(filepath: str):
     with open(filepath,'r') as f:
         return json.load(f)
 
 login_lottie_file = lottie_files("lottiefiles/login.json")
 
-fb_credentials = os.getenv("FIREBASE_CREDENTIALS")
-firebase_api_key = os.getenv("FIREBASE_API_KEY", "")
+fb_credentials = os.getenv("FIREBASE_CREDENTIALS") or streamlit_secret("FIREBASE_CREDENTIALS")
+firebase_api_key = os.getenv("FIREBASE_API_KEY") or streamlit_secret("FIREBASE_API_KEY")
 
 # If env var is not set, look for a credentials file at the repo root named
 # `firebase-credentials.json` and use it as a convenient fallback.
@@ -33,7 +40,10 @@ if not fb_credentials:
 firebase_initialized = False
 if fb_credentials and not firebase_admin._apps:
     try:
-        cred = credentials.Certificate(fb_credentials)
+        if isinstance(fb_credentials, dict):
+            cred = credentials.Certificate(dict(fb_credentials))
+        else:
+            cred = credentials.Certificate(fb_credentials)
         firebase_admin.initialize_app(cred)
         firebase_initialized = True
     except Exception as e:
