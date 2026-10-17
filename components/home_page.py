@@ -10,7 +10,7 @@ def load_lottiefile(filepath: str):
 lottie_water_plant = load_lottiefile('lottiefiles/water_plant.json')
 
 def home():
-    st.toast("꧁ ༺ 𝐖𝐄𝐋𝐂🌏𝐌𝐄 ༻ ꧂",icon='🙏')
+    st.toast("𝐖𝐄𝐋𝐂𝐎𝐌𝐄",icon='🙏')
     
     st.markdown("""<h1 style=' text-align: center; color: #1995AD; font-size: 90px;'>
     <span style='color:#00131a; font-weight: bold; text-shadow: 4px 2px #888888; font-family:Gill Sans, sans-serif'>HydroWatch </span>

@@ -20,6 +20,14 @@ def lottie_files(filepath: str):
 login_lottie_file = lottie_files("lottiefiles/login.json")
 
 fb_credentials = os.getenv("FIREBASE_CREDENTIALS")
+firebase_api_key = os.getenv("FIREBASE_API_KEY", "")
+
+# If env var is not set, look for a credentials file at the repo root named
+# `firebase-credentials.json` and use it as a convenient fallback.
+if not fb_credentials:
+    default_cred_path = os.path.join(os.getcwd(), "firebase-credentials.json")
+    if os.path.exists(default_cred_path):
+        fb_credentials = default_cred_path
 
 # Initialize Firebase only if credentials are available
 firebase_initialized = False
@@ -74,7 +82,7 @@ def app():
                 payload["displayName"] = username 
             payload = json.dumps(payload)
             # -----> make sure you insert your firebase passkey here 
-            r = requests.post(rest_api_url, params={"key": "AIzaSyAPKhhz8TSHOPW9mXl7JEm_Cnj3Ms9X-T8"}, data=payload)
+            r = requests.post(rest_api_url, params={"key": firebase_api_key}, data=payload)
             
             response_data = r.json()
             
@@ -119,7 +127,7 @@ def app():
            
             payload = json.dumps(payload)
             # -----> make sure you insert your firebase passkey here 
-            r = requests.post(rest_api_url, params={"key": "AIzaSyAPKhhz8TSHOPW9mXl7JEm_Cnj3Ms9X-T8"}, data=payload)
+            r = requests.post(rest_api_url, params={"key": firebase_api_key}, data=payload)
             
             data = r.json()
             
@@ -157,7 +165,7 @@ def app():
             }
             payload = json.dumps(payload)
             # -----> make sure you insert your firebase passkey here 
-            r = requests.post(rest_api_url, params={"key": "AIzaSyAPKhhz8TSHOPW9mXl7JEm_Cnj3Ms9X-T8"}, data=payload)
+            r = requests.post(rest_api_url, params={"key": firebase_api_key}, data=payload)
             if r.status_code == 200:
                 return True, "Reset email Sent"
             else:

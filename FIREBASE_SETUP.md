@@ -57,6 +57,7 @@ The `.env` file has already been created for you with default values:
 ```bash
 # Firebase Configuration
 FIREBASE_CREDENTIALS=./firebase-credentials.json
+FIREBASE_API_KEY=your_firebase_web_api_key
 
 # Database Configuration (Optional - for MySQL)
 DB_HOST=localhost

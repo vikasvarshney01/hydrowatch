@@ -1,7 +1,8 @@
 firebase_admin
 streamlit_lottie
 streamlit
-mysql.connector
+mysql-connector-python
+tornado
 pandas
 matplotlib
 numpy

@@ -1,9 +1,13 @@
-# JSON files (includes Firebase credentials and Lottie files)
-*.json
-
-# Environment variables
+# Local environment variables and secrets
 .env
 .env.local
+.env.*
+!.env.example
+firebase-credentials.json
+**/*firebase-credentials*.json
+**/*service-account*.json
+*.pem
+*.key
 
 # Python cache
 __pycache__/
@@ -12,6 +16,8 @@ __pycache__/
 
 # Virtual environment
 venv/
+.venv/
+.runvenv/
 env/
 
 # IDE
@@ -23,3 +29,10 @@ env/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local runtime output
+*.log
+*.sqlite
+*.sqlite3
+*.db
+file.png
